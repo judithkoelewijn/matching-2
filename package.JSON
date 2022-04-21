@@ -1,12 +1,24 @@
+
+
+
 {
-    
-"dependencies": {
-    
-    
+
+"name": "matching-2",
+"email":"koelewijnjudith@hotmail.com",
+"url": "https://github.com/judithkoelewijn",
+"version": "1.0.0",
+"description": "boilerplate setup 1",
+"main": "index.js",    
+"dependencies": {   
 "camelcase": "^6.3.0",
-    
-    
 "chalk": "^5.0.1"
     
-}
+},
+
+
+"author": "Judith koelewijn",
+  "license": "MIT",
+  "engines": {
+    "node": "14.x"
+  }
 }
