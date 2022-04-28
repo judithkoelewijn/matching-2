@@ -14,9 +14,11 @@
     },
     "author": "Judith koelewijn",
     "license": "MIT",
-   
     "scripts": {
         "dev": "nodemon index.js",
         "start": "node index.js"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.15"
     }
 }
