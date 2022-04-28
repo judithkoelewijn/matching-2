@@ -8,7 +8,6 @@ Bij dit project ligt de focus op het bouwen van een feature voor een matching ap
 
 - Het installeren
 - Licensie
-- Voorbeelden en visuals 
 - Contributers
 
 ##  Installeren
