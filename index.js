@@ -1,26 +1,52 @@
-// console log test terminal with node.js //
+/*****************************************************
+ * Defining constants and variables
+ ****************************************************/
 
-console.log("This is a test with my personal access token");
+const express = require('express')
+const res = require('express/lib/response')
+const app = express()
+const port = 3000
+app.set('view engine', 'ejs')
 
-// test with Hello World //
-
-// Load HTTP module
-const http = require("http");
-
-const hostname = "127.0.0.1";
-const port = 8000;
-
-// Create HTTP server
-const server = http.createServer(function(req, res) {
-
-   // Set the response HTTP header with HTTP status and Content type
-   res.writeHead(200, {'Content-Type': 'text/plain'});
-
-   // Send the response body "Hello World"
-   res.end('Hello World!!!\n');
-});
-
-// Prints a log once the server starts listening
-server.listen(port, hostname, function() {
-   console.log(`Server succesfully running at http://${hostname}:${port}/`);
+const user = {
+    firstName: 'Judith',
+    lastName: 'Koelewijn',
+}
+app.get('/', (req, res) => {
+    res.render('pages/index', {
+        user: user
+    })
 })
+
+app.get('/about', (req, res) => {
+   res.render('pages/about', {
+       user: user
+   })
+})
+
+
+/*****************************************************
+ * Middleware
+ ****************************************************/
+
+ app.use(express.static('public'))
+
+
+/*****************************************************
+ * If no routes give response, show 404 Page
+ ****************************************************/
+
+ app.use( (req, res) => {
+   res.status(404).render('pages/404')
+   
+})
+
+
+/*****************************************************
+ * Start webserver
+ ****************************************************/
+
+ app.listen(port, () => {
+   console.log(`web server  running on http://localhost:${port}`)
+ })
+ 
