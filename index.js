@@ -1,6 +1,4 @@
-/*****************************************************
- * Defining constants and variables
- ****************************************************/
+/* Defining constants and variables */ 
 
 const express = require('express')
 const res = require('express/lib/response')
@@ -25,26 +23,18 @@ app.get('/about', (req, res) => {
 })
 
 
-/*****************************************************
- * Middleware
- ****************************************************/
+/* Middleware */ 
 
  app.use(express.static('public'))
 
 
-/*****************************************************
- * If no routes give response, show 404 Page
- ****************************************************/
-
- app.use( (req, res) => {
-   res.status(404).render('pages/404')
-   
+/* If no routes give response, change route to 404 page (state) */ 
+app.use( (req, res) => {
+    res.status(404).render('pages/404')
 })
 
 
-/*****************************************************
- * Start webserver
- ****************************************************/
+/* Start webserver */ 
 
  app.listen(port, () => {
    console.log(`web server  running on http://localhost:${port}`)
