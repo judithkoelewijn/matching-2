@@ -3,6 +3,9 @@
     "email": "koelewijnjudith@hotmail.com",
     "url": "https://github.com/judithkoelewijn",
     "version": "1.0.0",
+    "engines": {
+        "node": "18.x"
+      },
     "description": "boilerplate setup 1",
     "main": "index.js",
     "dependencies": {
