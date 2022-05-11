@@ -1,2 +1,26 @@
-<h1>This is a about page, i am <%= user.firstName %></h1>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header.ejs') %>
+
+    </header>
+
+    <h1>This is a about page, i am <%= user.firstName %></h1>
+
+     
+
+    <footer>
+    
+    <!--working with include: including a footer from the partial directory-->
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+</body>
+
+</html>

@@ -36,10 +36,11 @@ app.get('/login', (req, res) => {
  })
  
 
-app.get('/profile', (req, res) => {
-    res.render('pages/profile', )
+ app.get('/profile', (req, res) => {
+    res.render('pages/profile', {
+        user: user
+    })
  })
-
 
  app.get('/results', (req, res) => {
     res.render('pages/results', )

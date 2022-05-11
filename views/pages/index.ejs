@@ -1,15 +1,94 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../public/css/style.css" rel="stylesheet" type="text/css">
-    <title>Document</title>
+    <%- include('../partials/head.ejs') %>
 </head>
+
 <body>
-    <h1>This is a user.firstname test, user.firstname == <%= user.firstName %></h1>
+    <header>
+        <%- include('../partials/header.ejs') %>
+
+    </header>
+
+    <main>
+
+<section class="formIntro">
+
+    <!--Section with title and description-->
+
+    <section class="titleDescription">
+     
+     <h1>Samen wandelen <br> <span style="color:#FBD5C2">is veel leuker</span></h1>
+        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+               Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h2>
+    </section>
+
+
+
+
+<!--Section with form-->
+
+<section class="form">
+    <ul>
+        <form id="contact-form" method="POST" action="/results">
+            <li> <label for="name"> Wat is je naam?</label>
+                <input type="text" name="name" ></li>
+
+            
+            <li> <label for="location" id="locatie"> Op welke locatie wil je wandelen?</label>
+                <input type="text" name="location"> </li>
+            <li><label for="interests"> Jouw favoriete interesses:</label>
+                <input type="text" name="interests"></li>
+
+
+            <li><label for="age" id="age"> Hoe lang wil je wandelen?</label>
+
+            <section class="radiobuttons">
+
+                <input type="radio" id="twintig" name="duur" value="20">
+            <li> <label id="twintig" for="twintig">20-30 minuten</label></li>
+
+            <input type="radio" id="dertig" name="duur" value="30">
+            <li> <label id="dertig" for="30-60">30-60 minuten</label></li>
+
+
+</section>
+            
+            <input class="input-button" type="submit" value="Matches genereren" />
+
+
+
+
+        </form>
+    </ul>
+</section>
+
+
+</section>
+
+
+
+
+
+
+
+    </main>
+
+    
+
+    <!--trying basic conditional statement with ejs-->
+
+    <%if (3==3) {%> <h2>Dit statement klopt!</h2> <%}%>
+    <%if (3==4) {%> <h2>Dit statement klopt niet!</h2> <%}%>    
+
+    <footer>
+    
+    <!--working with include: including a footer from the partial directory-->
+        <%- include('../partials/footer.ejs') %>
+    </footer>
 </body>
+
 </html>
