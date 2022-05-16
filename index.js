@@ -3,7 +3,7 @@
 const express = require('express')
 const res = require('express/lib/response')
 const app = express()
-const port = 3000
+const port = 3001
 const path = require("path")
 app.set('view engine', 'ejs')
 
@@ -16,13 +16,45 @@ const user = {
     lastName: 'Koelewijn',
 }
 
+const mascots = [
+    { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
+    { name: 'Tux', organization: "Linux", birth_year: 1996},
+    { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
+  ];
+
+
+const tagline = "No programming concept is complete without a cute animal mascot.";
+
+  
+
+/* Middleware (serving static files in Express) */ 
+
+app.use(express.static('public'))
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+
+
+
+
 /* Basic routing: determining how an application responds to a client request */ 
+
 
 app.get('/', (req, res) => {
     res.render('pages/index', {
-        user: user
-    })
+        mascots: mascots, 
+        tagline: tagline
+    });
+});
+
+app.post('/', (req,res) => {
+ console.log(req.body);
+
+ 
 })
+
+
+
 
 app.get('/about', (req, res) => {
    res.render('pages/about', {
@@ -46,9 +78,7 @@ app.get('/login', (req, res) => {
     res.render('pages/results', )
  })
 
-/* Middleware (serving static files in Express) */ 
 
-app.use(express.static('public'))
 
 
 /* If no routes give response, change route to 404 page (instead of 404 state) */ 
@@ -63,5 +93,6 @@ app.use( (req, res) => {
  app.listen(port, () => {
    console.log(`web server is running on http://localhost:${port}`)
  })
+ 
  
 
