@@ -1,11 +1,22 @@
 /* Defining constants and variables */ 
 
+
+
 const express = require('express')
 const res = require('express/lib/response')
 const app = express()
-const port = 3001
+const port = 1234;
 const path = require("path")
 app.set('view engine', 'ejs')
+const mongoose = require('mongoose');
+const connectDB = require('./config/dbConn');
+
+/* connect to db */ 
+
+connectDB();
+
+
+
 
 /* middleware */ 
 
@@ -33,6 +44,7 @@ app.use(express.static('public'))
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
+
 
 
 
@@ -90,8 +102,13 @@ app.use( (req, res) => {
 
 /* Start webserver */ 
 
- app.listen(port, () => {
-   console.log(`web server is running on http://localhost:${port}`)
+
+ mongoose.connection.once('open', () => {
+     console.log('Yeah succesfully connected to mongo!!');
+     app.listen(port, () => {
+        console.log(`The web server is currently running on: http://localhost:${port}`)
+      })
+     
  })
  
  
