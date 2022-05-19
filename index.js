@@ -1,5 +1,5 @@
 /* Defining constants and variables */ 
-
+require('dotenv').config();
 
 
 const express = require('express')
@@ -14,9 +14,6 @@ const connectDB = require('./config/dbConn');
 /* connect to db */ 
 
 connectDB();
-
-
-
 
 /* middleware */ 
 
