@@ -21,8 +21,14 @@
      
      <h1>Samen wandelen <br> <span style="color:#FBD5C2">is veel leuker</span></h1>
 
-     <h2><%= test %></h2>
-     
+    
+
+     <ul>
+        <% for(var i=0; i<test.length; i++) {%>
+           <li><%= test[i] %></li>
+        <% } %>
+        </ul>
+    
      
         <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

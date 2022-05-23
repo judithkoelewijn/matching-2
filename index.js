@@ -12,33 +12,15 @@ const { MongoClient } = require('mongodb');
 const { ObjectId } = require('mongodb');
 app.set('view engine', 'ejs')
 
+
+
 let db = null; 
-
-
-
-/* connect to db */ 
-
 
 
 /* middleware */ 
 
 app.use('/public', express.static('public'));
 
-const user = {
-    firstName: 'Judith',
-    lastName: 'Koelewijn',
-}
-
-const mascots = [
-    { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
-    { name: 'Tux', organization: "Linux", birth_year: 1996},
-    { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
-  ];
-
-
-const tagline = "No programming concept is complete without a cute animal mascot.";
-
-  
 
 /* Middleware (serving static files in Express) */ 
 
@@ -46,10 +28,6 @@ app.use(express.static('public'))
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
-
-
-
-
 
 /* Basic routing: determining how an application responds to a client request */ 
 
@@ -64,15 +42,11 @@ app.get('/', async (req, res) => {
 
 
 
-
-
-
 app.post('/', (req,res) => {
  console.log(req.body);
 
  
 })
-
 
 
 
