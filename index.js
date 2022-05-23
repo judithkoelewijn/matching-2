@@ -1,5 +1,5 @@
 /* Defining constants and variables */ 
-require('dotenv').config();
+
 
 
 const express = require('express')
@@ -7,13 +7,18 @@ const res = require('express/lib/response')
 const app = express()
 const port = 1234;
 const path = require("path")
+const dotenv = require('dotenv').config();
+const { MongoClient } = require('mongodb');
+const { ObjectId } = require('mongodb');
 app.set('view engine', 'ejs')
-const mongoose = require('mongoose');
-const connectDB = require('./config/dbConn');
+
+let db = null; 
+
+
 
 /* connect to db */ 
 
-connectDB();
+
 
 /* middleware */ 
 
@@ -49,12 +54,20 @@ app.use(express.urlencoded({extended: true}))
 /* Basic routing: determining how an application responds to a client request */ 
 
 
-app.get('/', (req, res) => {
+
+
+app.get('/', async (req, res) => {
+    
+    const notes = await db.collection('notes').find({},{}).toArray();
     res.render('pages/index', {
-        mascots: mascots, 
-        tagline: tagline
+        
     });
+
+   
 });
+
+
+
 
 app.post('/', (req,res) => {
  console.log(req.body);
@@ -97,16 +110,34 @@ app.use( (req, res) => {
 })
 
 
+/*****************************************************
+ * Connect to database
+ ****************************************************/
+ async function connectDB() {
+    const uri = process.env.DB_URI;
+    const client = new MongoClient(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+    try {
+        await client.connect();
+        db = client.db(process.env.DB_NAME);
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 /* Start webserver */ 
 
 
- mongoose.connection.once('open', () => {
-     console.log('Yeah succesfully connected to mongo!!');
-     app.listen(port, () => {
-        console.log(`The web server is currently running on: http://localhost:${port}`)
-      })
-     
- })
- 
+app.listen(port, () => {
+    console.log(`web server  running on http://localhost:${port}`)
+    console.log(process.env.TESTVAR)
+
+    connectDB().then(console.log("We have a connection to mongo!!"))
+
+  });
+
  
 
