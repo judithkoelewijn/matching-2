@@ -55,16 +55,14 @@ app.use(express.urlencoded({extended: true}))
 
 
 
-
 app.get('/', async (req, res) => {
-    
-    const notes = await db.collection('notes').find({},{}).toArray();
-    res.render('pages/index', {
-        
-    });
 
-   
+    const test = await db.collection('notes').find({}).toArray();
+    res.render('pages/index', {test});
+    console.log(test);
 });
+
+
 
 
 
