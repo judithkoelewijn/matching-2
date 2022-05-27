@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,16 +12,16 @@
 
     </header>
 
-    <h1>Your matches:</h1>
+    <h1>Jouw matches:</h1>
 
  
     <ul>
         <% match.forEach(function(match) { %>
           <li>
-            <strong>name:<%= match.name %></strong>
-            location: <%= match.location %>,
-            interest: <%= match.interest %>,
-            duration of walk:  <%= match.time %>
+            <strong>naam:<%= match.name %></strong>
+            locatie: <%= match.location %>,
+            interesse: <%= match.interest %>,
+            lengte wandeling:  <%= match.time %>
           </li>
         <% }); %>
       </ul>

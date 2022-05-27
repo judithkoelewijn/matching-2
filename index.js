@@ -9,6 +9,7 @@ const arrayify = require('arrayify');
 const dotenv = require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const { ObjectId } = require('mongodb');
+const { last } = require('lodash');
 app.set('view engine', 'ejs')
 
 /* by defining let db = null at start scope, it can be used outside of the function scope of async home route */ 
@@ -81,8 +82,16 @@ app.get('/login', (req, res) => {
  })
 
  app.get('/results', async (req, res) => {
-    const match = await db.collection('test').find({}).toArray();
+    const match = await db.collection('test').find({location:"test location3"}).toArray();
+    const lastUser = await
+    db.collection('test').findOne(
+       {},
+       { sort: { _id: -1 } });
+      
     console.log("hier console log ik de output van de match:", match);
+    console.log("lsatUser", lastUser);
+   
+    
     res.render('pages/results', {
         match: match 
     
@@ -90,7 +99,10 @@ app.get('/login', (req, res) => {
 
  })
 
- 
+
+
+
+/*  const lastUser = await db.collection('test').find({_id:-1}).limit(1); */ 
 
 
 /* If no routes give response, change route to 404 page (instead of 404 state) */ 
