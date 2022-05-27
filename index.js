@@ -5,6 +5,7 @@ const res = require('express/lib/response')
 const app = express()
 const port = 1234;
 const path = require("path")
+const arrayify = require('arrayify');
 const dotenv = require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const { ObjectId } = require('mongodb');
@@ -28,6 +29,7 @@ app.use(express.urlencoded({extended: true}))
 
 /* Basic routing: determining how an application responds to a client request */ 
 
+
 /* add new data to collection, then console.log the new test collection (which is updated) */ 
 
 app.get('/', async (req, res) => {
@@ -50,11 +52,14 @@ app.post('/', async (req, res) => {
     let newUser = {
         name: req.body.name,
         location: req.body.location, 
-        interest: req.body.interest
+        interest: req.body.interest,
+        time: req.body.time
     };
 
     await db.collection('test').insertOne(newUser);
+    res.redirect('/results');
 });
+
 
 
 app.get('/about', (req, res) => {
@@ -75,9 +80,17 @@ app.get('/login', (req, res) => {
     })
  })
 
- app.get('/results', (req, res) => {
-    res.render('pages/results', )
+ app.get('/results', async (req, res) => {
+    const match = await db.collection('test').find({}).toArray();
+    console.log("hier console log ik de output van de match:", match);
+    res.render('pages/results', {
+        match: match 
+    
+      });
+
  })
+
+ 
 
 
 /* If no routes give response, change route to 404 page (instead of 404 state) */ 

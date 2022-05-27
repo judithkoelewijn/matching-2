@@ -16,7 +16,17 @@
 
     <h1>Your matches:</h1>
 
-
+ 
+    <ul>
+        <% match.forEach(function(match) { %>
+          <li>
+            <strong>name:<%= match.name %></strong>
+            location: <%= match.location %>,
+            interest: <%= match.interest %>,
+            duration of walk:  <%= match.time %>
+          </li>
+        <% }); %>
+      </ul>
      
 
     <footer>
