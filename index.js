@@ -10,6 +10,7 @@ const dotenv = require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const { ObjectId } = require('mongodb');
 const { last } = require('lodash');
+const { match } = require('assert');
 app.set('view engine', 'ejs')
 
 /* by defining let db = null at start scope, it can be used outside of the function scope of async home route */ 
@@ -37,7 +38,7 @@ app.get('/', async (req, res) => {
     db.collection('test').insertOne({ name: "test user3", location: "test location3", interest:"backend3" });
     const test = await db.collection('test').find({}).toArray();
     res.render('pages/index', {test});
-    console.log(test);
+    // console.log(test);
 
 });
 
@@ -82,22 +83,44 @@ app.get('/login', (req, res) => {
  })
 
  app.get('/results', async (req, res) => {
-    const match = await db.collection('test').find({location:"test location3"}).toArray();
+    // const match = await db.collection('test').find({location:"test location3"}).toArray();
+ 
     const lastUser = await
     db.collection('test').findOne(
        {},
        { sort: { _id: -1 } });
-      
-    console.log("hier console log ik de output van de match:", match);
-    console.log("lsatUser", lastUser);
-   
+
+    // const beter = await db.collection('test').find({$where: match.location == lastUser.location});
     
+
+    // console.log("hier console log ik de output van de match:", match);
+    console.log("lsatUser", lastUser);
+    console.log("lastuser Location:",lastUser.location);
+    
+    const match = await db.collection('test').find({location:lastUser.location}).toArray();
+    
+    const notEq = await db.collection('test').find( { _id: { $ne: lastUser._id } } ).toArray();
+    
+    
+
+  
+    console.log("match", match);
+    console.log("niet gelijk aan", notEq);
+
+
+    /* test code */ 
+
+ 
+    
+    // console.log("dit zou de match moeten zijn", match);
+  
     res.render('pages/results', {
         match: match 
     
       });
 
  })
+
 
 
 
