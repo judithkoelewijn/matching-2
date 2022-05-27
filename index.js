@@ -1,7 +1,5 @@
 /* Defining constants and variables */ 
 
-
-
 const express = require('express')
 const res = require('express/lib/response')
 const app = express()
@@ -12,42 +10,39 @@ const { MongoClient } = require('mongodb');
 const { ObjectId } = require('mongodb');
 app.set('view engine', 'ejs')
 
-
+/* by defining let db = null at start scope, it can be used outside of the function scope of async home route */ 
 
 let db = null; 
 
 
-/* middleware */ 
+/* Middleware (serving static files in Express, urlencoded express) */ 
+
 
 app.use('/public', express.static('public'));
-
-
-/* Middleware (serving static files in Express) */ 
 
 app.use(express.static('public'))
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
+
 /* Basic routing: determining how an application responds to a client request */ 
 
-
+/* add new data to collection, then console.log the new test collection (which is updated) */ 
 
 app.get('/', async (req, res) => {
-
-    const test = await db.collection('notes').find({}).toArray();
+    db.collection('test').insertOne({ name: "test user3", location: "test location3", interest:"backend3" });
+    const test = await db.collection('test').find({}).toArray();
     res.render('pages/index', {test});
     console.log(test);
+
 });
-
-
 
 app.post('/', (req,res) => {
  console.log(req.body);
 
  
 })
-
 
 
 app.get('/about', (req, res) => {
@@ -73,8 +68,6 @@ app.get('/login', (req, res) => {
  })
 
 
-
-
 /* If no routes give response, change route to 404 page (instead of 404 state) */ 
 
 app.use( (req, res) => {
@@ -82,9 +75,8 @@ app.use( (req, res) => {
 })
 
 
-/*****************************************************
- * Connect to database
- ****************************************************/
+/* connect with async function to mongodb database */ 
+
  async function connectDB() {
     const uri = process.env.DB_URI;
     const client = new MongoClient(uri, {
@@ -94,13 +86,17 @@ app.use( (req, res) => {
     try {
         await client.connect();
         db = client.db(process.env.DB_NAME);
+      
+
+
     } catch (error) {
         throw error;
     }
 }
 
-
 /* Start webserver */ 
+
+/* listen to correct port, connect and console log when connection is succesfull */ 
 
 
 app.listen(port, () => {
@@ -110,6 +106,3 @@ app.listen(port, () => {
     connectDB().then(console.log("We have a connection to mongo!!"))
 
   });
-
- 
-
