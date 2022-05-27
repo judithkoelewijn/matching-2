@@ -38,11 +38,23 @@ app.get('/', async (req, res) => {
 
 });
 
+/* 
 app.post('/', (req,res) => {
  console.log(req.body);
 
  
-})
+}) */ 
+
+app.post('/', async (req, res) => {
+    // add new user from index.ejs form // 
+    let newUser = {
+        name: req.body.name,
+        location: req.body.location, 
+        interest: req.body.interest
+    };
+
+    await db.collection('test').insertOne(newUser);
+});
 
 
 app.get('/about', (req, res) => {
