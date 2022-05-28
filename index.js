@@ -10,7 +10,7 @@ const dotenv = require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const { ObjectId } = require('mongodb');
 const { last } = require('lodash');
-const { match } = require('assert');
+const { match, notDeepEqual } = require('assert');
 app.set('view engine', 'ejs')
 
 /* by defining let db = null at start scope, it can be used outside of the function scope of async home route */ 
@@ -100,12 +100,17 @@ app.get('/login', (req, res) => {
     const match = await db.collection('test').find({location:lastUser.location}).toArray();
     
     const notEq = await db.collection('test').find( { _id: { $ne: lastUser._id } } ).toArray();
-    
-    
 
+    // const finalMatch = await db.collection('test').find({location:notEq.location}).toArray();
+
+    const testMatch = await db.collection('test').find( { $and: [ { _id: { $ne: lastUser._id } }, { location: { $eq: lastUser.location } } ] } ).toArray();
   
     console.log("match", match);
     console.log("niet gelijk aan", notEq);
+    console.log("testmatches", testMatch);
+
+
+   
 
 
     /* test code */ 
