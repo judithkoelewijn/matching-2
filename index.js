@@ -97,20 +97,18 @@ app.get('/login', (req, res) => {
     console.log("lsatUser", lastUser);
     console.log("lastuser Location:",lastUser.location);
     
-    const match = await db.collection('test').find({location:lastUser.location}).toArray();
+    // const match = await db.collection('test').find({location:lastUser.location}).toArray();
     
-    const notEq = await db.collection('test').find( { _id: { $ne: lastUser._id } } ).toArray();
+    // const notEq = await db.collection('test').find( { _id: { $ne: lastUser._id } } ).toArray();
 
     // const finalMatch = await db.collection('test').find({location:notEq.location}).toArray();
 
-    const testMatch = await db.collection('test').find( { $and: [ { _id: { $ne: lastUser._id } }, { location: { $eq: lastUser.location } } ] } ).toArray();
+    const match = await db.collection('test').find( { $and: [ { _id: { $ne: lastUser._id } }, { location: { $eq: lastUser.location } } ] } ).toArray();
   
     console.log("match", match);
-    console.log("niet gelijk aan", notEq);
-    console.log("testmatches", testMatch);
+   //  console.log("niet gelijk aan", notEq);
+   //  console.log("testmatches", testMatch);
 
-
-   
 
 
     /* test code */ 
