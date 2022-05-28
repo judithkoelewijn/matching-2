@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header.ejs') %>
+
+    </header>
+
+   <h2>Je profiel is gewijzigd!</h2>
+  
+
+   <section class="userInfo">
+       <h3>Jouw nieuwe informatie:</h3>
+
+    <p>Naam:<%= user.name %></p>
+    <p>Locatie:<%= user.location %></p>
+    <p>Interesse:<%= user.interest %></p>
+    <p>Tijdsduur:<%= user.time %></p>
+
+</section>
+
+
+<a href="results"><button>Check je nieuwe matches</button></a>
+
+
+
+    <footer>
+
+        <!--working with include: including a footer from the partial directory-->
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+</body>
+
+</html>

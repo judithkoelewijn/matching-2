@@ -29,25 +29,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 
-/* Basic routing: determining how an application responds to a client request */ 
-
-
 /* add new data to collection, then console.log the new test collection (which is updated) */ 
 
 app.get('/', async (req, res) => {
-    db.collection('test').insertOne({ name: "test user3", location: "test location3", interest:"backend3" });
-    const test = await db.collection('test').find({}).toArray();
-    res.render('pages/index', {test});
-    // console.log(test);
-
+    res.render('pages/index');
+ 
 });
 
-/* 
-app.post('/', (req,res) => {
- console.log(req.body);
-
- 
-}) */ 
 
 app.post('/', async (req, res) => {
     // add new user from index.ejs form // 
@@ -75,12 +63,8 @@ app.get('/login', (req, res) => {
     res.render('pages/login', )
  })
  
+ 
 
- app.get('/profile', (req, res) => {
-    res.render('pages/profile', {
-        user: user
-    })
- })
 
  app.get('/results', async (req, res) => {
     // const match = await db.collection('test').find({location:"test location3"}).toArray();
@@ -89,34 +73,13 @@ app.get('/login', (req, res) => {
     db.collection('test').findOne(
        {},
        { sort: { _id: -1 } });
-
-    // const beter = await db.collection('test').find({$where: match.location == lastUser.location});
-    
-
-    // console.log("hier console log ik de output van de match:", match);
-    console.log("lsatUser", lastUser);
-    console.log("lastuser Location:",lastUser.location);
-    
-    // const match = await db.collection('test').find({location:lastUser.location}).toArray();
-    
-    // const notEq = await db.collection('test').find( { _id: { $ne: lastUser._id } } ).toArray();
-
-    // const finalMatch = await db.collection('test').find({location:notEq.location}).toArray();
-
+ 
     const match = await db.collection('test').find( { $and: [ { _id: { $ne: lastUser._id } }, { location: { $eq: lastUser.location } } ] } ).toArray();
   
+
     console.log("match", match);
-   //  console.log("niet gelijk aan", notEq);
-   //  console.log("testmatches", testMatch);
+   
 
-
-
-    /* test code */ 
-
- 
-    
-    // console.log("dit zou de match moeten zijn", match);
-  
     res.render('pages/results', {
         match: match 
     
@@ -125,10 +88,59 @@ app.get('/login', (req, res) => {
  })
 
 
+ app.get('/profile', async (req, res) => {
+
+    const lastUser = await
+    db.collection('test').findOne(
+       {},
+       { sort: { _id: -1 } });
+
+    res.render('pages/profile', {
+        user: lastUser
+    })
+ })
+
+
+ app.post('/profile', async  (req, res) => {
+    // add new user from index.ejs form // 
+    let updatedUser = {
+        location: req.body.newLocation
+       
+    };
+
+    const lastUser = await
+    db.collection('test').findOne(
+       {},
+       { sort: { _id: -1 } });
+
+
+  /* new update test code */ 
+
+   const newUpdated =  db.collection('test').update(
+    {  _id: { $eq: lastUser._id } },
+    { $set: { location : updatedUser.location } }
+ );
+   
+    res.redirect('/profile-changed');
+   
+});
+
+
+app.get('/profile-changed', async (req, res) => {
+
+    const lastUser = await
+    db.collection('test').findOne(
+       {},
+       { sort: { _id: -1 } });
+
+    res.render('pages/profile-changed', {
+        user: lastUser
+    })
+ })
+ 
 
 
 
-/*  const lastUser = await db.collection('test').find({_id:-1}).limit(1); */ 
 
 
 /* If no routes give response, change route to 404 page (instead of 404 state) */ 
