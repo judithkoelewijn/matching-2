@@ -62,6 +62,15 @@ app.get('/about', (req, res) => {
 app.get('/login', (req, res) => {
     res.render('pages/login', )
  })
+
+ app.get('/deleted', (req, res) => {
+    res.render('pages/deleted', )
+ })
+ 
+
+ app.get('/delete', (req, res) => {
+    res.render('pages/delete', )
+ })
  
  
 
@@ -116,7 +125,7 @@ app.get('/login', (req, res) => {
 
   /* new update test code */ 
 
-   const newUpdated =  db.collection('test').update(
+   const newUpdated =  db.collection('test').updateOne(
     {  _id: { $eq: lastUser._id } },
     { $set: { location : updatedUser.location } }
  );
@@ -133,15 +142,28 @@ app.get('/profile-changed', async (req, res) => {
        {},
        { sort: { _id: -1 } });
 
-    res.render('pages/profile-changed', {
+    await res.render('pages/profile-changed', {
         user: lastUser
     })
  })
+
+
+ app.post('/delete', async  (req, res) => {
+    // add new user from index.ejs form // 
+
+
+    const lastUser = await
+    db.collection('test').findOne(
+       {},
+       { sort: { _id: -1 } });
+
+
+ await db.collection('test').deleteOne(  {  _id: { $eq: lastUser._id } })
+ res.redirect('/deleted');
+
+
+});
  
-
-
-
-
 
 /* If no routes give response, change route to 404 page (instead of 404 state) */ 
 
@@ -181,3 +203,6 @@ app.listen(port, () => {
     connectDB().then(console.log("We have a connection to mongo!!"))
 
   });
+
+
+ 
