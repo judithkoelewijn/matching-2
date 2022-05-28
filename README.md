@@ -23,7 +23,7 @@ Voor het installeren van de feature moet je de volgende stappen doorlopen:
 
 3. Vervolgens het starten van de server via npm:
 
-```npm start```
+```npm run dev```
 
 ##  Licensie
 
