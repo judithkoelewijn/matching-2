@@ -39,13 +39,13 @@
     <ul>
         <form name="userForm" action="/" id="contact-form" method="post" >
             <li> <label for="name"> Wat is je naam?<br></label>
-                <input type="text" name="name" ></li>
+                <input type="text" name="name" required></li>
 
             
             <li> <label for="location" id="locatie"> Op welke locatie wil je wandelen?</label>
-                <input type="text" name="location"> </li>
+                <input type="text" name="location" required> </li>
             <li><label for="interest"> Jouw favoriete interesses:</label>
-                <input type="text" name="interest"></li>
+                <input type="text" name="interest" required></li>
 
 
             <li><label for="duration" id="duration"> Hoe lang wil je wandelen?</label>
@@ -74,12 +74,6 @@
 
     </main>
 
-    
-
-    <!--trying basic conditional statement with ejs-->
-
-    <%if (3==3) {%> <h2>Dit statement klopt!</h2> <%}%>
-    <%if (3==4) {%> <h2>Dit statement klopt niet!</h2> <%}%>    
 
     <footer>
     

@@ -11,37 +11,57 @@
 
     </header>
 
-    <h2>Welkom, <strong><%= user.name %></strong></h2>
+
+
+    
+
+<h2>Hey <span style="color:#12A58A"> <strong><%= user.name %></strong></span>, dit is jouw profiel:</h2>
+
+   
 
     <section class="userInfo">
 
-        <p>Naam:<%= user.name %></p>
-        <p>Locatie:<%= user.location %></p>
-        <p>Interesse:<%= user.interest %></p>
-        <p>Tijdsduur:<%= user.time %></p>
+        <img class="avatar" src="../../public/images/avatar.png" height="80px" width="80px">
+
+        <section class="metadata">
+        
+        <h3>Jouw gegevens:</h3>
+
+   
+
+        <p>Naam: <%= user.name %></p>
+        <p>Locatie: <%= user.location %></p>
+        <p>Interesse: <%= user.interest %></p>
+        <p>Tijdsduur: <%= user.time %></p>
 
     </section>
 
+    </section>
 
-    <section class="form">
+    <section class="locatieWijzigen">
+    <h3>Wil je liever matchen op een andere locatie?</h3>
+    <p>Wijzig hier je locatie en wandel op een nieuwe plek :)</p>
+
+</section>
+    <section class="updateForm">
         <ul>
         
                 <form name="updateForm" action="/profile" id="contact-form" method="post" >
           
 
                 <li> <label for="newLocation" id="newLocation"> Op welke locatie wil je wandelen?</label>
-                    <input type="text" name="newLocation"> </li>
+                    <input type="text" name="newLocation" required> </li>
                
     
     </section>
                 
-                <input class="input-button" type="submit" value="Wijzig je locatie" />
+                <input class="input-button" type="submit" value="Wijzig je locatie"/>
     
             </form>
         </ul>
     </section>
 
-    <a href="delete"><button>Account verwijderen</button></a>
+    <a href="delete"><button class="input-button">Account verwijderen</button></a>
 
 
     <footer>
