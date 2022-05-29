@@ -29,7 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 
-/* add new data to collection, then console.log the new test collection (which is updated) */ 
 
 app.get('/', async (req, res) => {
     res.render('pages/index');
@@ -46,22 +45,15 @@ app.post('/', async (req, res) => {
         time: req.body.time
     };
 
-    await db.collection('test').insertOne(newUser);
+    // add newUser to database collection
+    await db.collection('users').insertOne(newUser);
     res.redirect('/results');
 });
 
 
-
-app.get('/about', (req, res) => {
-   res.render('pages/about', {
-       user: user
-   })
-})
+// rendering routes // 
 
 
-app.get('/login', (req, res) => {
-    res.render('pages/login', )
- })
 
  app.get('/deleted', (req, res) => {
     res.render('pages/deleted', )
@@ -73,20 +65,20 @@ app.get('/login', (req, res) => {
  })
  
  
+ // show results, find match in database, filter out current user and sent matches back
 
 
  app.get('/results', async (req, res) => {
-    // const match = await db.collection('test').find({location:"test location3"}).toArray();
  
     const lastUser = await
-    db.collection('test').findOne(
+    db.collection('users').findOne(
        {},
        { sort: { _id: -1 } });
  
-    const match = await db.collection('test').find( { $and: [ { _id: { $ne: lastUser._id } }, { location: { $eq: lastUser.location } } ] } ).toArray();
+    const match = await db.collection('users').find( { $and: [ { _id: { $ne: lastUser._id } }, { location: { $eq: lastUser.location } } ] } ).toArray();
   
 
-    console.log("match", match);
+    
    
 
     res.render('pages/results', {
@@ -96,11 +88,13 @@ app.get('/login', (req, res) => {
 
  })
 
+ // show profile: last added user // 
+
 
  app.get('/profile', async (req, res) => {
 
     const lastUser = await
-    db.collection('test').findOne(
+    db.collection('users').findOne(
        {},
        { sort: { _id: -1 } });
 
@@ -108,6 +102,8 @@ app.get('/login', (req, res) => {
         user: lastUser
     })
  })
+
+ // search for post request, edit location of current user to input from the form */ 
 
 
  app.post('/profile', async  (req, res) => {
@@ -118,14 +114,14 @@ app.get('/login', (req, res) => {
     };
 
     const lastUser = await
-    db.collection('test').findOne(
+    db.collection('users').findOne(
        {},
        { sort: { _id: -1 } });
 
 
-  /* new update test code */ 
+  /* new update, send new data to profile-changed (await) */ 
 
-   const newUpdated =  db.collection('test').updateOne(
+   const newUpdated =  db.collection('users').updateOne(
     {  _id: { $eq: lastUser._id } },
     { $set: { location : updatedUser.location } }
  );
@@ -138,7 +134,7 @@ app.get('/login', (req, res) => {
 app.get('/profile-changed', async (req, res) => {
 
     const lastUser = await
-    db.collection('test').findOne(
+    db.collection('users').findOne(
        {},
        { sort: { _id: -1 } });
 
@@ -153,12 +149,12 @@ app.get('/profile-changed', async (req, res) => {
 
 
     const lastUser = await
-    db.collection('test').findOne(
+    db.collection('users').findOne(
        {},
        { sort: { _id: -1 } });
 
 
- await db.collection('test').deleteOne(  {  _id: { $eq: lastUser._id } })
+ await db.collection('users').deleteOne(  {  _id: { $eq: lastUser._id } })
  res.redirect('/deleted');
 
 
@@ -197,8 +193,8 @@ app.use( (req, res) => {
 
 
 app.listen(port, () => {
-    console.log(`web server  running on http://localhost:${port}`)
-    console.log(process.env.TESTVAR)
+    console.log(`web server running on http://localhost:${port}`)
+   
 
     connectDB().then(console.log("We have a connection to mongo!!"))
 
