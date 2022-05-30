@@ -77,7 +77,7 @@ app.get('/delete', (req, res) => {
 
 
 // show results, find match in database, filter out current user and sent matches back
-//show routes
+//show routes + 
 
 
 app.get('/results', async (req, res) => {
