@@ -1,12 +1,10 @@
+
 {
     "name": "matching-2",
     "email": "koelewijnjudith@hotmail.com",
     "url": "https://github.com/judithkoelewijn",
-    "version": "1.0.0",
-    "engines": {
-        "node": "18.0.0",
-        "npm": "8.7.0"
-    },
+    "version": "1.0.0"
+ ,
     "description": "wandelmatch",
     "main": "index.js",
     "dependencies": {
