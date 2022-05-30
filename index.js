@@ -27,7 +27,7 @@ app.set('view engine', 'ejs')
 let db = null;
 
 
-// Middleware (serving static files in Express, urlencoded express) 
+// Middleware, (serving static files in Express, urlencoded express) 
 
 
 app.use('/public', express.static('public'));
@@ -77,6 +77,7 @@ app.get('/delete', (req, res) => {
 
 
 // show results, find match in database, filter out current user and sent matches back
+//show routes
 
 
 app.get('/results', async (req, res) => {
