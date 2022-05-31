@@ -32,6 +32,9 @@ Benodigde licensie: MIT licensie : https://choosealicense.com (MIT)
 
 ## Voorbeelden code
 
+<img width="1440" alt="Screenshot 2022-05-31 at 16 04 46" src="https://user-images.githubusercontent.com/74096730/171195389-0f590e6f-0a15-4de6-a682-1a6e68ae15e1.png">
+<img width="1440" alt="Screenshot 2022-05-31 at 16 04 56" src="https://user-images.githubusercontent.com/74096730/171195397-e86fe38c-7e29-4748-a410-080b24b073a4.png">
+<img width="1440" alt="Screenshot 2022-05-31 at 16 05 00" src="https://user-images.githubusercontent.com/74096730/171195406-e763b231-3370-463b-96fc-c14594b73d79.png">
 
 
 
