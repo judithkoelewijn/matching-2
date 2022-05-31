@@ -30,6 +30,10 @@ Voor het installeren van de feature moet je de volgende stappen doorlopen:
 
 Benodigde licensie: MIT licensie : https://choosealicense.com (MIT)
 
+## Voorbeelden code
+
+
+
 
 
 ##  Contributers
