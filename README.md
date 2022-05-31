@@ -9,7 +9,6 @@ nA
 
 - Het installeren
 - Licensie
-- Voorbeelden en visuals 
 - Contributers
 
 ##  Installeren
